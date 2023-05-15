@@ -144,6 +144,17 @@ Type: `bool`<br />
 
 Enable HTTP2 protocol handling
 
+### http_server_options.enable_strict_routes
+EV: <b>TYK_GW_HTTPSERVEROPTIONS_ENABLESTRICTROUTES</b><br />
+Type: `bool`<br />
+
+EnableStrictRoutes changes the routing to avoid nearest-neighbour requests on overlapping routes
+
+- if disabled, `/apple` will route to `/app`, the current default behavior,
+- if enabled, `/app` only responds to `/app`, `/app/` and `/app/*` but not `/apple`
+
+Regular expressions and parameterized routes will be left alone regardless of this setting.
+
 ### http_server_options.ssl_insecure_skip_verify
 EV: <b>TYK_GW_HTTPSERVEROPTIONS_SSLINSECURESKIPVERIFY</b><br />
 Type: `bool`<br />
@@ -158,17 +169,9 @@ Enabled WebSockets and server side events support
 
 ### http_server_options.certificates
 EV: <b>TYK_GW_HTTPSERVEROPTIONS_CERTIFICATES</b><br />
-Type: `[]CertData`<br />
+Type: `CertsData`<br />
 
 Deprecated. SSL certificates used by Gateway server.
-
-**CertData Object**
-
-| Variable | Type | Key | Description |
-| ----------- | ----------- | ----------- | ----------- |
-| Name | string | domain_name | Domain name |
-| CertFile | string | cert_file | Path to certificate file |
-| KeyFile | string | key_file | Path to private key file |
 
 ### http_server_options.ssl_certificates
 EV: <b>TYK_GW_HTTPSERVEROPTIONS_SSLCERTIFICATES</b><br />
@@ -193,6 +196,14 @@ EV: <b>TYK_GW_HTTPSERVEROPTIONS_MAXVERSION</b><br />
 Type: `uint16`<br />
 
 Maximum TLS version.
+
+### http_server_options.skip_client_ca_announcement
+EV: <b>TYK_GW_HTTPSERVEROPTIONS_SKIPCLIENTCAANNOUNCEMENT</b><br />
+Type: `bool`<br />
+
+When mTLS enabled, this option allows to skip client CA announcement in the TLS handshake.
+This option is useful when you have a lot of ClientCAs and you want to reduce the handshake overhead, as some clients can hit TLS handshake limits.
+This option does not give any hints to the client, on which certificate to pick (but this is very rare situation when it is required)
 
 ### http_server_options.flush_interval
 EV: <b>TYK_GW_HTTPSERVEROPTIONS_FLUSHINTERVAL</b><br />
@@ -242,7 +253,14 @@ Enable Key hashing
 EV: <b>TYK_GW_HASHKEYFUNCTION</b><br />
 Type: `string`<br />
 
-Specify the Key hashing algorithm. Possible values: murmur64, murmur128, sha256
+Specify the Key hashing algorithm. Possible values: murmur64, murmur128, sha256.
+
+### basic_auth_hash_key_function
+EV: <b>TYK_GW_BASICAUTHHASHKEYFUNCTION</b><br />
+Type: `string`<br />
+
+Specify the Key hashing algorithm for "basic auth". Possible values: murmur64, murmur128, sha256, bcrypt.
+Will default to "bcrypt" if not set.
 
 ### hash_key_function_fallback
 EV: <b>TYK_GW_HASHKEYFUNCTIONFALLBACK</b><br />
@@ -305,7 +323,10 @@ If you set this value to `true`, then the id parameter in a stored policy (or im
 This option should only be used when moving an installation to a new database.
 
 ### ports_whitelist
-Defines the ports that will be available for the API services to bind to.
+EV: <b>TYK_GW_PORTWHITELIST</b><br />
+Type: `PortsWhiteList`<br />
+
+Defines the ports that will be available for the API services to bind to in the following format: `{ “": “” }``.
 This is a map of protocol to PortWhiteList. This allows per protocol
 configurations.
 
@@ -540,6 +561,18 @@ EV: <b>TYK_GW_SLAVEOPTIONS_KEYSPACESYNCINTERVAL</b><br />
 Type: `float32`<br />
 
 You can use this to set a period for which the Gateway will check if there are changes in keys that must be synchronized. If this value is not set then it will default to 10 seconds.
+
+### slave_options.rpc_cert_cache_expiration
+EV: <b>TYK_GW_SLAVEOPTIONS_RPCCERTCACHEEXPIRATION</b><br />
+Type: `float32`<br />
+
+RPCCertCacheExpiration defines the expiration time of the rpc cache that stores the certificates, defined in seconds
+
+### slave_options.rpc_global_cache_expiration
+EV: <b>TYK_GW_SLAVEOPTIONS_RPCGLOBALCACHEEXPIRATION</b><br />
+Type: `float32`<br />
+
+RPCKeysCacheExpiration defines the expiration time of the rpc cache that stores the keys, defined in seconds
 
 ### management_node
 EV: <b>TYK_GW_MANAGEMENTNODE</b><br />
@@ -1344,6 +1377,12 @@ Type: `int`<br />
 
 Maximum message which can be sent to gRPC server
 
+### coprocess_options.grpc_authority
+EV: <b>TYK_GW_COPROCESSOPTIONS_GRPCAUTHORITY</b><br />
+Type: `string`<br />
+
+Authority used in GRPC connection
+
 ### coprocess_options.python_path_prefix
 EV: <b>TYK_GW_COPROCESSOPTIONS_PYTHONPATHPREFIX</b><br />
 Type: `string`<br />
@@ -1414,6 +1453,12 @@ EV: <b>TYK_GW_NEWRELIC_LICENSEKEY</b><br />
 Type: `string`<br />
 
 New Relic License key
+
+### newrelic.enable_distributed_tracing
+EV: <b>TYK_GW_NEWRELIC_ENABLEDISTRIBUTEDTRACING</b><br />
+Type: `bool`<br />
+
+Enable distributed tracing
 
 ### enable_http_profiler
 EV: <b>TYK_GW_HTTPPROFILE</b><br />
