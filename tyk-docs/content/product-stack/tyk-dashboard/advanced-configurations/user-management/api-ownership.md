@@ -21,9 +21,11 @@ API ownership is a key capability when you have multiple API development teams e
 The [user owned analytics]({{< ref "product-stack/tyk-dashboard/advanced-configurations/user-management/api-ownership#owned-analytics" >}}) feature allows you to prevent users from seeing the traffic to (and existence of) APIs for which they are not responsible. This reduces the opportunity for data leakage within your business.
 
 ## How API Ownership works
-A Dashboard User (or User Group) can be assigned as *owner* of an API, granting them visibility of and - given appropriate permissions - the ability to manage all the Tyk objects relating to that API, such as policies, key requests and Dashboard analytics. Assigning an owner to an API restricts visibility of that API and its related objects to other users who will not be able to view or manage it.
+By default, APIs and associated objects (such as policies and Dashboard analytics) are visible to all Tyk Dashboard users.
 
-When there is no owner assigned to an API, it and objects using it are visible to all users.
+A Dashboard User (or User Group) can be assigned as the *owner* of an API, granting that user (or user group) exclusive visibility of and - given appropriate permissions - the ability to manage all the Tyk objects relating to that API, such as policies, key requests and Dashboard analytics.
+
+Once an API has been assigned an *owner*, all non-owning users will lose visibility of - and access to - that API in the Tyk Dashboard.
 
 Where there is a conflict, for example when a policy is associated with multiple APIs and the user owns only one of those APIs, the user will have access to the object (though not the other APIs themselves). 
 
@@ -69,7 +71,7 @@ In the Dashboard UI, the control for `owned_analytics` is implemented as a drop-
 The Dashboard UI provides a simple method for managing *ownership* for your APIs, where you can select from the lists of users and user groups that have been created in the Dashboard. Users and user groups are managed in separate lists for ease of use.
 
 #### Using Tyk OAS APIs
-When using Tyk Classic APIs, the option to assign owner(s) to an API is provided on the **Access** tab in the API Designer. You simply select the owner (or owners) that you wish to assign to the API from the drop-down boxes:
+When using Tyk OAS APIs, the option to assign owner(s) to an API is provided on the **Access** tab in the API Designer. You simply select the owner (or owners) that you wish to assign to the API from the drop-down boxes:
 {{< img src="/img/dashboard/endpoint-designer/ownership-oas.png" alt="API ownership section for Tyk OAS APIs" >}}
 
 You can remove owners from the API by clicking on the `x` next to their name in the drop-down/selection box.
@@ -88,7 +90,7 @@ When working with Tyk OAS APIs, you can manage owners for an API using these end
 
 | Method | Endpoint path           | Action                                                                                 |
 |--------|-------------------------|----------------------------------------------------------------------------------------|
-| `PUT`  | `/apis/{apiId}/access`  | Assign a list of owners to the specified API                                           |
+| `PUT`  | `/apis/{apiID}/access`  | Assign a list of owners to the specified API                                           |
 | `GET`  | `/apis/{apiID}/access`  | Retrieve the list of owners of the specified API                                       |
 
 For each of these endpoints, the payload consists of two string lists: one for user IDs, the other for user group IDs.
@@ -108,5 +110,5 @@ When working with Tyk Classic APIs, you manage owners for an API by modifying th
 
 | Method | Endpoint            | Action                                                                                                                |
 |--------|---------------------|-----------------------------------------------------------------------------------------------------------------------|
-| `PUT`  | `/api/apis/{apiId}` | Update the API definition for the specified API - CRUD API owners in the `user_owners` and `user_group_owners` fields |
+| `PUT`  | `/api/apis/{apiID}` | Update the API definition for the specified API - CRUD API owners in the `user_owners` and `user_group_owners` fields |
 | `GET`  | `/api/apis/{apiID}` | Retrieve the API definition for the specified API - ownership details are included in `user_owners` and `user_group_owners` fields |

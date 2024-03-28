@@ -56,4 +56,4 @@ Selecting the **Account is Admin** checkbox from the Dashboard gives the user fu
 ### Custom user permissions
 You can create your own custom permissions for use with the [Open Policy Agent (OPA)]({{< ref "tyk-dashboard/open-policy-agent" >}}) using the [Additional Permissions]({{< ref "tyk-dashboard-api/org/permissions" >}}) endpoint in the Tyk Dashboard Admin API. This allows you to add and delete (CRUD) a list of additional (custom) permissions for your Dashboard users. Once created, a custom permission will be added to standard list of user permissions. 
 
-You can also configure these custom permissions in the `security.additional_permissions` map in the Tyk Dashboard configuration file. 
+You can also configure these custom permissions in the `security.additional_permissions` [map]({{< ref "tyk-dashboard/configuration#securityadditional_permissions" >}}) in the Tyk Dashboard configuration file. 
