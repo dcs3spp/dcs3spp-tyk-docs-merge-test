@@ -82,7 +82,6 @@ jobs:
 
       - name: Check broken links
         run: |
-          cat $GITHUB_EVENT_PATH
           base_branch=$(jq -r ".pull_request.base.ref" "$GITHUB_EVENT_PATH")
           commit_before_pull_request=$(git merge-base origin/$base_branch HEAD)
           echo "Base PR commit: $commit_before_pull_request"
