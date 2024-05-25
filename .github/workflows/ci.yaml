@@ -24,14 +24,13 @@ jobs:
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "0.111.3"
-          extended:
-            true
+          extended: true
 
-            #       - name: Cache Hugo build
-            #         uses: actions/cache@v2
-            #         with:
-            #           path: tyk-docs/public
-            #           key: ${{ runner.os }}-hugo-${{ hashFiles('tyk-docs/**') }}
+      #       - name: Cache Hugo build
+      #         uses: actions/cache@v2
+      #         with:
+      #           path: tyk-docs/public
+      #           key: ${{ runner.os }}-hugo-${{ hashFiles('tyk-docs/**') }}
 
       - name: Build
         run: |
@@ -75,10 +74,6 @@ jobs:
         with:
           name: hugo-config
           path: tyk-docs/
-
-      - name: Check config.toml has been updated
-        run: |
-          cat tyk-docs/config.toml
 
       - name: Run htmltest
         uses: wjdp/htmltest-action@master
