@@ -33,7 +33,7 @@ jobs:
           key: ${{ runner.os }}-hugo-${{ hashFiles('tyk-docs/**') }}
 
       - name: Build
-        run: cd tyk-docs && hugo --minify
+        run: cd tyk-docs && hugo
 
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v4
