@@ -27,7 +27,11 @@ jobs:
         run: cd tyk-docs && hugo --minify
 
       - name: Compress Hugo build artifacts
-        run: tar -czf hugo-site.tar.gz --exclude='.git' tyk-docs/public/
+        run: |
+          pwd
+          ls -la
+          ls -la .git
+          tar -czf hugo-site.tar.gz --exclude='.git' tyk-docs/public/
 
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v3
