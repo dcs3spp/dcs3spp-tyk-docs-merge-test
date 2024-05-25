@@ -42,7 +42,7 @@ jobs:
       - name: Restore source code
         uses: actions/checkout@v3
         with:
-          path: tyk-docs
+          # path: tyk-docs
           ref: ${{ needs.build.head_branch }}
 
       - name: Download Hugo build artifacts
@@ -51,8 +51,10 @@ jobs:
           name: hugo-site
           path: tyk-docs/public/
 
-      - name: List files in public directory
-        run: ls -la tyk-docs/public/
+      - name: List tyk-docs
+        run: |
+          ls -la tyk-docs/public/
+          ls -la tyk-docs
 
       - name: Check broken links
         run: |
