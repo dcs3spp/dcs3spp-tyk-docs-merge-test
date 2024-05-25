@@ -1,4 +1,4 @@
-DirectoryPath: "tyk-docs/public"
+DirectoryPath: "tyk-docs/tyk-docs/public"
 IgnoreAltMissing: true
 IgnoreAltEmpty: true
 IgnoreDirectoryMissingTrailingSlash: true
