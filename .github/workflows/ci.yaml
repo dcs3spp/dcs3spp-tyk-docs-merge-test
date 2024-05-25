@@ -32,8 +32,7 @@ jobs:
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: hugo-site
-          path: tyk-docs/hugo-site.tar.gz
+          name: hugo-site-site.tar.gz
 
   use-artifact:
     runs-on: ubuntu-22.04
