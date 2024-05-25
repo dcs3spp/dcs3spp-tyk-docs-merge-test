@@ -39,12 +39,12 @@ showEmptyPages = false
 [frontmatter]
 lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
 [outputFormats.urlcheck]
-   mediaType = "text/plain"
+   mediaType = "application/json"
    baseName = "urlcheck"
    isPlainText = true
    notAlternative = true
 [outputFormats.netlify]
-  mediaType = "text/plain"
+  mediaType = "application/json"
   baseName = "netlify"
   isPlainText = true
   notAlternative = true
@@ -61,16 +61,16 @@ lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
   quality = 100
   resampleFilter = 'Lanczos'
 
-[build]
-  formats = ["HTML","netlify","urlcheck","pagesurl"]
-  minify = true
+# [build]
+#   formats = ["HTML","netlify","urlcheck","pagesurl"]
+#   minify = true
 
 [outputs]
   home = ["HTML","netlify","urlcheck","pagesurl"]
 
 ## this is test only - do not merge
-[ignoreFiles]
-  ["**/*.json"]
+# [ignoreFiles]
+#   ["**/*.json"]
 
 [related]
   includeNewer = true
