@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
+      - name: Enable step debugging
+        run: echo "ACTIONS_STEP_DEBUG=true" >> $GITHUB_ENV
+
       - uses: actions/checkout@v3
         with:
           submodules: true # Fetch Hugo themes (true OR recursive)
@@ -34,10 +37,10 @@ jobs:
           tar -czf hugo-site.tar.gz --exclude='.git' tyk-docs/public/
 
       - name: Upload Hugo build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: hugo-site-site.tar.gz
-          path: .
+          name: hugo-site
+          path: tyk-docs/public
 
   use-artifact:
     runs-on: ubuntu-22.04
