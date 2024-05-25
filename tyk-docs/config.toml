@@ -39,7 +39,7 @@ showEmptyPages = false
 [frontmatter]
 lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
 [outputFormats.urlcheck]
-   mediaType = "application/json"
+   mediaType = "text/plain"
    baseName = "urlcheck"
    isPlainText = true
    minify = false
@@ -51,10 +51,9 @@ lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
   minify = false
   notAlternative = true
 [outputFormats.pagesurl]
-   mediaType = "text/plain"
+   mediaType = "application/json"
    baseName = "pagesurl"
    isPlainText = true
-   minify = false
    notAlternative = true
 
 [imaging]
