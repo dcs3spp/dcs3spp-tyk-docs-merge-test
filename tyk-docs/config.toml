@@ -51,9 +51,10 @@ lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
   minify = false
   notAlternative = true
 [outputFormats.pagesurl]
-   mediaType = "application/json"
+   mediaType = "text/plain"
    baseName = "pagesurl"
    isPlainText = true
+   minify = false
    notAlternative = true
 
 [imaging]
