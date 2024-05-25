@@ -9,19 +9,39 @@ on:
   pull_request:
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.92.1'
+          hugo-version: "0.92.1"
           extended: true
 
       - name: Build
-        run: cd tyk-docs && hugo
+        run: cd tyk-docs && hugo --minify
+
+      - name: Upload Hugo build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: hugo-site
+          path: public/
+
+  use-artifact:
+    runs-on: ubuntu-22.04
+    needs: build
+
+    steps:
+      - name: Download Hugo build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: hugo-site
+          path: public/
+
+      - name: List files in public directory
+        run: ls -la public/
