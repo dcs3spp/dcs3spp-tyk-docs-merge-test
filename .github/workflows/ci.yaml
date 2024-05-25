@@ -23,18 +23,11 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "0.92.1"
+          hugo-version: "0.111.3"
           extended: true
 
       - name: Build
         run: cd tyk-docs && hugo --minify
-
-      - name: Compress Hugo build artifacts
-        run: |
-          pwd
-          ls -la
-          ls -la .git
-          tar -czf hugo-site.tar.gz --exclude='.git' tyk-docs/public/
 
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v4
@@ -50,8 +43,8 @@ jobs:
       - name: Download Hugo build artifacts
         uses: actions/download-artifact@v3
         with:
-          name: hugo-site.tar.gz
+          name: hugo-site
           path: tyk-docs/public/
 
       - name: List files in public directory
-        run: ls -la tyk-docs/public/hugo-site.tar.gz
+        run: ls -la tyk-docs/public/
