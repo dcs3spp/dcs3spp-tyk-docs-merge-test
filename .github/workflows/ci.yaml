@@ -46,10 +46,10 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build
     steps:
-      - name: Restore source code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
-          ref: ${{ needs.build.head_branch }}
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0
 
       - name: Download Hugo build artifacts
         uses: actions/download-artifact@v4
