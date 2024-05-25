@@ -63,16 +63,8 @@ lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
   quality = 100
   resampleFilter = 'Lanczos'
 
-# [build]
-#   formats = ["HTML","netlify","urlcheck","pagesurl"]
-#   minify = true
-
 [outputs]
   home = ["HTML","netlify","urlcheck","pagesurl"]
-
-## this is test only - do not merge
-# [ignoreFiles]
-#   ["**/*.json"]
 
 [related]
   includeNewer = true
