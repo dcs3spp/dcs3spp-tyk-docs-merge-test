@@ -45,7 +45,7 @@ lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
    minify = false
    notAlternative = true
 [outputFormats.netlify]
-  mediaType = "application/json"
+  mediaType = "text/plain"
   baseName = "netlify"
   isPlainText = true
   minify = false
