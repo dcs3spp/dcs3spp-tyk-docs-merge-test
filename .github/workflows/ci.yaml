@@ -45,29 +45,32 @@ jobs:
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: hugo-site
-          path: tyk-docs/public
+          name:
+            - hugo-site
+            - hugo-config
+          path:
+            - tyk-docs/public
+            - tyk-docs/config.toml
           retention-days: 1
 
   htmltest:
     runs-on: ubuntu-22.04
     needs: build
     steps:
-      #       - uses: actions/checkout@v3
-      #         with:
-      #           submodules: true # Fetch Hugo themes (true OR recursive)
-      #           fetch-depth: 0
-
       - name: Restore source code
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
-      - name: Download Hugo build artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: hugo-site
-          path: tyk-docs/public/
+          name:
+            - hugo-site
+            - hugo-config
+          path:
+            - tyk-docs/public/
+            - tyk-docs/config.toml
 
       - name: Check config.toml has been updated
         run: |
