@@ -26,6 +26,12 @@ jobs:
           hugo-version: "0.111.3"
           extended: true
 
+      - name: Cache Hugo build
+        uses: actions/cache@v2
+        with:
+          path: tyk-docs/public
+          key: ${{ runner.os }}-hugo-${{ hashFiles('tyk-docs/**') }}
+
       - name: Build
         run: cd tyk-docs && hugo --minify
 
@@ -75,6 +81,7 @@ jobs:
 
       - name: Check broken links
         run: |
+          echo $GITHUB_EVENT_PATH
           base_branch=$(jq -r ".pull_request.base.ref" "$GITHUB_EVENT_PATH")
           commit_before_pull_request=$(git merge-base origin/$base_branch HEAD)
           echo "Base PR commit: $commit_before_pull_request"
