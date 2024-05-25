@@ -74,7 +74,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: hugo-config
-          path: tyk-docs/config.toml
+          path: tyk-docs/
 
       - name: Check config.toml has been updated
         run: |
