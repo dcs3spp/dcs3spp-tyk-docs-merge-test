@@ -45,12 +45,10 @@ jobs:
       - name: Upload Hugo build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name:
-            - hugo-site
-            - hugo-config
-          path:
-            - tyk-docs/public
-            - tyk-docs/config.toml
+          name: hugo-site
+          path: |
+            tyk-docs/public
+            tyk-docs/config.toml
           retention-days: 1
 
   htmltest:
@@ -66,11 +64,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name:
-            - hugo-site
-            - hugo-config
-          path:
-            - tyk-docs/public/
-            - tyk-docs/config.toml
+            hugo-site
+            #           path: |
+            #             tyk-docs/public/
+            #             tyk-docs/config.toml
 
       - name: Check config.toml has been updated
         run: |
