@@ -42,13 +42,17 @@ jobs:
           hugo
           cd ..
 
-      - name: Upload Hugo build artifacts
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: hugo-site
-          path: |
-            tyk-docs/public
-            tyk-docs/config.toml
+          path: tyk-docs/public
+
+      - name: Upload config artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hugo-config
+          path: tyk-docs/config.toml
           retention-days: 1
 
   htmltest:
@@ -60,14 +64,17 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.base.ref }}
 
-      - name: Download artifacts
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name:
-            hugo-site
-            #           path: |
-            #             tyk-docs/public/
-            #             tyk-docs/config.toml
+          name: hugo-site
+          path: tyk-docs/public/
+
+      - name: Download config artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hugo-config
+          path: tyk-docs/config.toml
 
       - name: Check config.toml has been updated
         run: |
