@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hugo-site
-          path: public/
+          path: tyk-docs/public/
 
   use-artifact:
     runs-on: ubuntu-22.04
@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: hugo-site
-          path: public/
+          path: tyk-docs/public/
 
       - name: List files in public directory
-        run: ls -la public/
+        run: ls -la tyk-docs/public/
