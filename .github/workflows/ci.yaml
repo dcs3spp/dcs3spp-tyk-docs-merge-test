@@ -77,7 +77,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ needs.build.head_branch }}
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0
 
       - name: Check broken links
         run: |
