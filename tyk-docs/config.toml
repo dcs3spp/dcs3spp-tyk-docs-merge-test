@@ -39,21 +39,23 @@ showEmptyPages = false
 [frontmatter]
 lastmod = ["lastmod", ":git",':fileModTime', "date", "publishDate"]
 [outputFormats.urlcheck]
-   mediaType = "application/json"
+   mediaType = "text/plain"
    baseName = "urlcheck"
    isPlainText = true
+   minify = false
    notAlternative = true
-
 [outputFormats.netlify]
-  mediaType = "application/json"
+  mediaType = "text/plain"
   baseName = "netlify"
   isPlainText = true
+  minify = false
   notAlternative = true
 [outputFormats.pagesurl]
    mediaType = "application/json"
    baseName = "pagesurl"
    isPlainText = true
    notAlternative = true
+
 [imaging]
   anchor = 'Smart'
   bgColor = '#ffffff'
