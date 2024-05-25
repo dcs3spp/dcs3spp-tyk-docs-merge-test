@@ -62,9 +62,12 @@ jobs:
           name: hugo-site
           path: tyk-docs/public/
 
+      - name: Make artifact files writable
+        run: |
+          chmod -R +w tyk-docs/public/
+
       - name: Check broken links
         run: |
-          ls -la tyk-docs/public
           cd tyk-docs
           sed -i "s|//tyk.io/docs/nightly/|/|" config.toml
           sed -i -E 's|//tyk\.io/docs/[0-9]+(\.[0-9]+)?/|/|g' config.toml
