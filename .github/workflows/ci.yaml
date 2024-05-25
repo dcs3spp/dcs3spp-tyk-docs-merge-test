@@ -33,6 +33,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: hugo-site-site.tar.gz
+          path: .
 
   use-artifact:
     runs-on: ubuntu-22.04
