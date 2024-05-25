@@ -69,9 +69,11 @@ jobs:
 
       - name: List files after artifact download
         run: |
-          echo "ARTIFACT ROOT STATUS"
+          echo "$PWD"
           ls -la
-          echo "ARTIFACT"
+          echo "tyk-docs @ $PWD"
+          ls -la tyk-docs
+          echo "tyk-docs/public $PWD"
           ls -la tyk-docs/public
 
             # - name: Check broken links
